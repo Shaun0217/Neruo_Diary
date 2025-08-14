@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Post — The Neuro Diary</title>
+
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'neuro-navy': '#0b1f3a',
+            'neuro-steel': '#4a5568',
+            'neuro-teal': '#2c7a7b',
+            'neuro-gold': '#d4af37'
+          },
+          fontFamily: {
+            heading: ['Merriweather Sans', 'Inter', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .neuro-watermark {
+      background-image: radial-gradient(circle at 10% 20%, rgba(44,122,123,0.05), transparent 20%),
+                        radial-gradient(circle at 80% 80%, rgba(44,122,123,0.03), transparent 20%);
+    }
+    #progress {
+      height: 3px;
+      background: linear-gradient(90deg, #2c7a7b, #d4af37);
+      width: 0%;
+    }
+  </style>
+</head>
+<body class="font-body bg-white text-neuro-steel">
+
+  <!-- Progress bar -->
+  <div id="progress" class="fixed top-0 left-0 z-50"></div>
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="brain_diary.png" alt="Logo" class="w-10 h-10 object-contain" />
+          <div>
+            <div class="text-neuro-navy font-heading text-lg">The Neuro Diary</div>
+            <div class="text-xs text-neuro-steel">Where science meets story</div>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="index.html" class="text-sm hover:text-neuro-teal">Home</a>
+          <a href="blog.html" class="text-sm hover:text-neuro-teal">Blog</a>
+          <a href="about.html" class="text-sm hover:text-neuro-teal">About</a>
+          <a href="newsletter.html" class="ml-4 inline-block text-sm font-medium px-3 py-2 rounded-md border border-neuro-teal text-neuro-teal bg-neuro-teal/10 hover:bg-neuro-teal hover:text-white transition">Join Newsletter</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded hover:bg-gray-100 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-neuro-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-3 space-y-3">
+      <a href="index.html" class="block text-sm hover:text-neuro-teal">Home</a>
+      <a href="blog.html" class="block text-sm hover:text-neuro-teal">Blog</a>
+      <a href="about.html" class="block text-sm hover:text-neuro-teal">About</a>
+      <a href="newsletter.html" class="block text-sm font-medium px-3 py-2 rounded-md border border-neuro-teal text-neuro-teal bg-neuro-teal/10 hover:bg-neuro-teal hover:text-white transition">Join Newsletter</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="neuro-watermark">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <article id="post-content" class="bg-white p-4 sm:p-8 rounded-lg shadow">
+        <div id="post-loading" class="text-center text-neuro-steel">Loading post...</div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-neuro-steel text-center">
+      &copy; 2025 The Neuro Diary. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progress').style.width = progress + '%';
+    });
+
+    // Mobile menu toggle
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyANp00pH5YCJh0D2Rd_MA2JKJHIthRlAoY",
+      authDomain: "neuro-diary-blog.firebaseapp.com",
+      projectId: "neuro-diary-blog",
+      storageBucket: "neuro-diary-blog.firebasestorage.app",
+      messagingSenderId: "720975355720",
+      appId: "1:720975355720:web:600c1182a641503420dd7d",
+      measurementId: "G-539Y3PQHPD"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Get post from URL param
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get("id");
+
+    if (!postId) {
+      document.getElementById("post-content").innerHTML = "<p class='text-red-500'>No post found.</p>";
+    } else {
+      db.collection("posts").doc(postId).get().then(doc => {
+        if (!doc.exists) {
+          document.getElementById("post-content").innerHTML = "<p class='text-red-500'>Post not found.</p>";
+        } else {
+          const post = doc.data();
+          document.getElementById("post-content").innerHTML = `
+            ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" class="w-full max-h-64 object-cover rounded mb-6">` : ""}
+            <h1 class="text-2xl sm:text-3xl font-heading text-neuro-navy mb-4">${post.title}</h1>
+            <p class="text-xs sm:text-sm text-neuro-steel mb-6">${new Date(post.created_at.seconds * 1000).toLocaleDateString()}</p>
+            <div class="prose max-w-none text-sm sm:text-base">${post.content || ""}</div>
+          `;
+        }
+      }).catch(err => {
+        console.error(err);
+        document.getElementById("post-content").innerHTML = "<p class='text-red-500'>Error loading post.</p>";
+      });
+    }
+  </script>
+</body>
+</html>
