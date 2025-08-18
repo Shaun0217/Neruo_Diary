@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy — The Neuro Diary</title>
+
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'neuro-navy': '#0b1f3a',
+            'neuro-steel': '#4a5568',
+            'neuro-teal': '#2c7a7b',
+            'neuro-gold': '#d4af37'
+          },
+          fontFamily: {
+            heading: ['Merriweather Sans', 'Inter', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-body bg-white text-neuro-steel">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="brain_diary.png" alt="Logo" class="w-10 h-10 object-contain" />
+          <div>
+            <div class="text-neuro-navy font-heading text-lg">The Neuro Diary</div>
+            <div class="text-xs text-neuro-steel">Where science meets story</div>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="index.html" class="text-sm hover:text-neuro-teal">Home</a>
+          <a href="blog.html" class="text-sm hover:text-neuro-teal">Blog</a>
+          <a href="about.html" class="text-sm hover:text-neuro-teal">About</a>
+          <a href="newsletter.html" class="ml-4 inline-block text-sm font-medium px-3 py-2 rounded-md border border-neuro-teal text-neuro-teal bg-neuro-teal/10 hover:bg-neuro-teal hover:text-white transition">Join Newsletter</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="neuro-watermark">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <article class="bg-white p-6 sm:p-10 rounded-lg shadow">
+        <h1 class="text-2xl sm:text-3xl font-heading text-neuro-navy mb-6">Privacy Policy</h1>
+        <p class="mb-4 text-sm sm:text-base">At <strong>The Neuro Diary</strong>, we respect your privacy. This policy outlines how we collect, use, and protect your information when you visit our website.</p>
+
+        <h2 class="text-lg font-heading text-neuro-navy mt-6 mb-2">Information We Collect</h2>
+        <p class="mb-4 text-sm sm:text-base">We may collect limited personal information if you sign up for our newsletter, such as your name and email address. We also gather anonymous analytics data to improve our content and website performance.</p>
+
+        <h2 class="text-lg font-heading text-neuro-navy mt-6 mb-2">How We Use Your Information</h2>
+        <p class="mb-4 text-sm sm:text-base">Your information is used to provide updates, share new content, and improve user experience. We do not sell or share your personal information with third parties.</p>
+
+        <h2 class="text-lg font-heading text-neuro-navy mt-6 mb-2">Cookies</h2>
+        <p class="mb-4 text-sm sm:text-base">This site may use cookies for basic functionality and analytics. You can disable cookies in your browser settings at any time.</p>
+
+        <h2 class="text-lg font-heading text-neuro-navy mt-6 mb-2">Third-Party Services</h2>
+        <p class="mb-4 text-sm sm:text-base">We may use trusted third-party services (such as Google Analytics or Firebase) that collect and process data to help us run this website.</p>
+
+        <h2 class="text-lg font-heading text-neuro-navy mt-6 mb-2">Your Rights</h2>
+        <p class="mb-4 text-sm sm:text-base">You may request to access, update, or delete your personal data at any time by contacting us at <a href="mailto:shaunhafez@gmail.com" class="text-neuro-teal hover:underline">shaunhafez@gmail.com</a>.</p>
+
+        <h2 class="text-lg font-heading text-neuro-navy mt-6 mb-2">Updates</h2>
+        <p class="mb-4 text-sm sm:text-base">This Privacy Policy may be updated periodically. Changes will be reflected on this page with a new “last updated” date.</p>
+
+        <p class="mt-8 text-sm sm:text-base text-neuro-steel"><em>Last updated: August 2025</em></p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-neuro-steel flex flex-col sm:flex-row items-center justify-between">
+      <div>&copy; 2025 The Neuro Diary. All rights reserved.</div>
+      <div class="mt-2 sm:mt-0">
+        <a href="privacy.html" class="hover:text-neuro-teal">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
