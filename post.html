@@ -37,6 +37,14 @@
       background: linear-gradient(90deg, #2c7a7b, #d4af37);
       width: 0%;
     }
+
+    /* 🚫 Disable text selection & copying */
+    #post-content, #post-body {
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      -moz-user-select: none;
+    }
   </style>
 </head>
 <body class="font-body bg-white text-neuro-steel">
@@ -95,14 +103,14 @@
   </main>
 
   <!-- Footer -->
-<footer class="bg-white border-t">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-neuro-steel flex flex-col sm:flex-row items-center justify-between">
-    <div>&copy; 2025 The Neuro Diary. All rights reserved.</div>
-    <div class="mt-2 sm:mt-0">
-      <a href="privacy.html" class="hover:text-neuro-teal">Privacy Policy</a>
+  <footer class="bg-white border-t">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-neuro-steel flex flex-col sm:flex-row items-center justify-between">
+      <div>&copy; 2025 The Neuro Diary. All rights reserved.</div>
+      <div class="mt-2 sm:mt-0">
+        <a href="privacy.html" class="hover:text-neuro-teal">Privacy Policy</a>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
   <!-- Scripts -->
   <script>
@@ -118,6 +126,19 @@
     document.getElementById('menu-toggle').addEventListener('click', () => {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
+    });
+
+    // 🚫 Disable right-click & copy
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => {
+      e.preventDefault();
+      alert("Copying is disabled on this page.");
+    });
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'u' || e.key === 's')) {
+        e.preventDefault();
+        alert("This action is disabled.");
+      }
     });
   </script>
 
@@ -151,16 +172,48 @@
           document.getElementById("post-content").innerHTML = "<p class='text-red-500'>Post not found.</p>";
         } else {
           const post = doc.data();
-          document.getElementById("post-content").innerHTML = `
+
+                    // Build outer layout
+          const postHtml = `
             ${post.imageUrl ? `
               <div class="w-full aspect-[16/9] sm:aspect-[21/9] mb-6 overflow-hidden rounded">
                 <img src="${post.imageUrl}" alt="${post.title}" class="w-full h-full object-cover" />
               </div>
             ` : ""}
-            <h1 class="text-2xl sm:text-3xl font-heading text-neuro-navy mb-4">${post.title}</h1>
-            <p class="text-xs sm:text-sm text-neuro-steel mb-6">${new Date(post.created_at.seconds * 1000).toLocaleDateString()}</p>
-            <div class="prose max-w-none text-sm sm:text-base">${post.content || ""}</div>
+            <h1 class="text-2xl sm:text-3xl font-heading text-neuro-navy mb-2">${post.title}</h1>
+
+<!-- Author Info -->
+<div class="flex items-center gap-3 text-xs sm:text-sm text-neuro-steel mb-6">
+  
+  <p>
+    By <span class="font-semibold text-neuro-navy">Shaun Hafez</span> · 
+    ${post.created_at?.seconds ? new Date(post.created_at.seconds * 1000).toLocaleDateString() : ""}
+  </p>
+</div>
+            <div id="post-body" class="prose max-w-none text-sm sm:text-base mb-10"></div>
+
+            <!-- About the Author -->
+            <div class="mt-12 p-6 border-t border-gray-200 bg-neuro-teal/5 rounded-lg">
+              <div class="flex items-start gap-4">
+                <img src="prof_photo.png" alt="Author photo" class="w-16 h-16 rounded-full object-cover border-2 border-neuro-teal" />
+                <div>
+                  <h2 class="font-heading text-lg text-neuro-navy mb-1">About the Author</h2>
+                  <p class="text-sm text-neuro-steel leading-relaxed">
+                    Shaun Hafez is the founder of <em>The Neuro Diary</em>, where science meets storytelling. 
+                    He is passionate about neuroscience, medicine, and making complex ideas accessible to everyone. 
+                    When he’s not writing, Shaun works on projects like 3D-printed brain models, medical research, 
+                    and exploring the connections between the brain and human experience.
+                  </p>
+                </div>
+              </div>
+            </div>
           `;
+
+
+          document.getElementById("post-content").innerHTML = postHtml;
+
+          // Inject Quill's HTML content directly
+          document.getElementById("post-body").innerHTML = post.content || "";
         }
       }).catch(err => {
         console.error(err);
